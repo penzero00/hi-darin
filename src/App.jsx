@@ -154,14 +154,14 @@ const App = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 justify-items-center">
           {polaroids.map((item, idx) => (
             <div 
-              key={idx} 
-              className={`bg-white p-4 pb-16 shadow-xl w-full max-w-sm transform hover:scale-105 hover:z-20 transition-all duration-500 ${item.rotation} relative`}
+              key={idx}
+              className={`bg-white p-4 pb-16 shadow-xl w-full max-w-sm transform transition-all duration-500 ${item.rotation} relative`}
             >
               {/* Tape Effect */}
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-rose-100/80 rotate-2 shadow-sm"></div>
               
               <div className="aspect-[4/5] bg-stone-100 mb-4 overflow-hidden transition-all duration-700">
-                <img src={item.img} alt="Her" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={item.img} alt="Her" className="w-full h-full object-cover transition-transform duration-700 hover:scale-105 active:scale-105" />
               </div>
               <div className="absolute bottom-4 left-4 right-4">
                 <p className="font-serif text-xl text-rose-900">{item.caption}</p>
@@ -210,12 +210,14 @@ const App = () => {
               
               <button 
                 onMouseEnter={moveNoButton}
+                onTouchStart={moveNoButton}
+                onTouchMove={moveNoButton}
                 onClick={handleYesClick} // Fallback if she manages to click it
                 style={{ 
                   transform: `translate(${noBtnPosition.x}px, ${noBtnPosition.y}px)`,
                   transition: 'all 0.1s ease-out'
                 }}
-                className="px-12 py-4 bg-white text-rose-400 border-2 border-rose-200 rounded-full font-bold text-xl hover:bg-rose-50 transition-all z-10"
+                className="px-12 py-4 bg-white text-rose-400 border-2 border-rose-200 rounded-full font-bold text-xl hover:bg-rose-50 active:bg-rose-100 transition-all z-10"
               >
                 No
               </button>
@@ -226,7 +228,7 @@ const App = () => {
           </div>
         ) : (
           <div className="text-center animate-in zoom-in duration-700 relative z-50">
-            <div className="text-9xl mb-6 animate-bounce">🥰🍒💖</div>
+            <div className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl mb-6 animate-bounce">🥰🍒💖</div>
             <h2 className="text-5xl md:text-8xl font-serif text-rose-900 mb-6 drop-shadow-sm">
               YAAAAAY!
             </h2>
