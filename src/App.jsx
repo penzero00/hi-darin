@@ -9,6 +9,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [noBtnPosition, setNoBtnPosition] = useState({ x: 0, y: 0 });
   const [showConfetti, setShowConfetti] = useState(false);
+  const [hoveredPolaroid, setHoveredPolaroid] = useState(null);
   const audioRef = useRef(null);
   
   // Control audio playback
@@ -141,6 +142,21 @@ const App = () => {
           <span>My favorite person</span>
           <span>★</span>
           <span>Cherry on top</span>
+          <span>★</span>
+          <span>Cute Smile</span>
+          <span>★</span>
+          <span>My Baby</span>
+          <span>★</span>
+          <span>You are the prettiest</span>
+          <span>★</span>
+          <span>My favorite person</span>
+          <span>★</span>
+          <span>Cherry on top</span>
+          <span>★</span>
+          <span>Cute Smile</span>
+          <span>★</span>
+          <span>My Baby</span>
+          <span>★</span>
         </div>
       </div>
 
@@ -155,7 +171,16 @@ const App = () => {
           {polaroids.map((item, idx) => (
             <div 
               key={idx}
+              onMouseEnter={() => setHoveredPolaroid(idx)}
+              onMouseLeave={() => setHoveredPolaroid(null)}
+              onTouchStart={() => setHoveredPolaroid(idx)}
+              onTouchEnd={() => setHoveredPolaroid(null)}
               className={`bg-white p-4 pb-16 shadow-xl w-full max-w-sm transform transition-all duration-500 ${item.rotation} relative`}
+              style={{
+                transform: hoveredPolaroid === idx 
+                  ? `${item.rotation === 'rotate-2' ? 'rotate(8deg)' : item.rotation === '-rotate-3' ? 'rotate(-8deg)' : 'rotate(12deg)'} scale(1.05)` 
+                  : ''
+              }}
             >
               {/* Tape Effect */}
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-rose-100/80 rotate-2 shadow-sm"></div>
@@ -212,7 +237,6 @@ const App = () => {
                 onMouseEnter={moveNoButton}
                 onTouchStart={moveNoButton}
                 onTouchMove={moveNoButton}
-                onClick={handleYesClick} // Fallback if she manages to click it
                 style={{ 
                   transform: `translate(${noBtnPosition.x}px, ${noBtnPosition.y}px)`,
                   transition: 'all 0.1s ease-out'
@@ -290,9 +314,13 @@ const App = () => {
         .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
         .animate-float-delayed { animation: float-delayed 7s ease-in-out infinite 2s; }
         .animate-scroll-down { animation: scroll-down 2s infinite; }
-        .animate-marquee { animation: marquee 20s linear infinite; }
+        .animate-marquee { animation: marquee 12s linear infinite; }
         .animate-spin-slow { animation: spin 8s linear infinite; }
         .animate-fall { animation: fall linear forwards; }
+        
+        @media (max-width: 768px) {
+          .animate-marquee { animation: marquee 10s linear infinite; }
+        }
       `}</style>
 
     </div>
